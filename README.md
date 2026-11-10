@@ -34,4 +34,4 @@ Conecté `Fa0/5` del switch a `Fa0/0` del router mediante un enlace troncal. Dej
 Para el tráfico de PC0 a PC2, el switch envía la trama al router con la etiqueta de la VLAN 10. El router consulta la IP de destino y devuelve el paquete por el mismo cable, en una trama con etiqueta de la VLAN 20. También asigné `192.168.99.10` al switch para administrarlo desde la VLAN 99.
 
 [Ver archivos del método 2](./01-enrutamiento-entre-vlan/metodo-2-enlace-troncal/)
-![Topología del método 2 con enlace troncal](./01-enrutamiento-entre-vlan/metodo-2-enlace-troncal/topologia-troncal.png)
+![Topología del método 2 con enlace troncal](./01-enrutamiento-entre-vlan/metodo-2-enlace-troncal/topologia.png)
