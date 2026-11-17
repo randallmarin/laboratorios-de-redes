@@ -4,12 +4,14 @@ En este repositorio documento mis prácticas de CCNA 2 en Cisco Packet Tracer. I
 
 ## Laboratorio 01 · Enrutamiento entre VLAN
 
-¿Cómo puede PC0, que pertenece a la VLAN 10, comunicarse con PC2, que pertenece a la VLAN 20? Implementé dos formas de conectar el switch al router para resolver el mismo problema.
 
-| Método | Conexión entre el switch y el router | Cómo distingue el router cada VLAN |
+¿Cómo puede PC0, que pertenece a la VLAN 10, comunicarse con PC2, que pertenece a la VLAN 20? Implementé tres métodos de enrutamiento inter-VLAN para resolver este problema: dos utilizando un router y uno mediante un switch multicapa.
+
+| Método | Conexión utilizada | Cómo se realiza el enrutamiento |
 |---|---|---|
-| [1 · Enlaces de acceso](./01-enrutamiento-entre-vlan/metodo-1-enlaces-de-acceso/) | Dos enlaces físicos, uno por VLAN | Por la interfaz física que recibe la trama |
-| [2 · Enlace troncal](./01-enrutamiento-entre-vlan/metodo-2-enlace-troncal/) | Un enlace compartido por las VLAN | Por la etiqueta 802.1Q asociada a cada subinterfaz |
+| [1 · Enlaces de acceso](./metodo-1-enlaces-de-acceso/) | Dos enlaces físicos, uno por VLAN | El router utiliza una interfaz física para cada red |
+| [2 · Enlace troncal](./metodo-2-enlace-troncal/) | Un enlace trunk 802.1Q | El router utiliza subinterfaces para distinguir las VLAN |
+| [3 · Switch multicapa](./metodo-3-switch-capa-3/) | Enlace trunk entre switches | El switch multicapa utiliza interfaces SVI para enrutar entre VLAN |
 
 ### Método 1 · Dos enlaces de acceso
 
@@ -35,3 +37,24 @@ Para el tráfico de PC0 a PC2, el switch envía la trama al router con la etique
 
 [Ver archivos del método 2](./01-enrutamiento-entre-vlan/metodo-2-enlace-troncal/)
 ![Topología del método 2 con enlace troncal](./01-enrutamiento-entre-vlan/metodo-2-enlace-troncal/topologia.png)
+
+---
+
+### Método 3 · Enrutamiento mediante switch multicapa
+
+En este método utilicé un switch multicapa Cisco 3560 y un switch Cisco 2960 conectados mediante un enlace troncal.
+
+A diferencia del método anterior, no necesité un router externo para realizar el enrutamiento entre las VLAN 10 y 20.
+
+Creé interfaces SVI en el switch multicapa, asignando `192.168.10.1` a la VLAN 10 y `192.168.20.1` a la VLAN 20. Estas direcciones funcionan como puertas de enlace de las computadoras.
+
+Además, utilicé el comando `ip routing` para habilitar el enrutamiento entre redes.
+
+Cuando PC0 necesita comunicarse con PC2, envía el paquete a su gateway `192.168.10.1`. El switch multicapa consulta su tabla de enrutamiento y reenvía el paquete hacia la VLAN 20.
+
+Con este método comprendí que un switch multicapa puede realizar funciones de capa 2 y capa 3, permitiendo la comunicación entre VLAN sin utilizar un router externo.
+
+#### Topología del método 3
+
+![Enrutamiento mediante switch multicapa](./metodo-3-switch-capa-3/topologia.png)
+
