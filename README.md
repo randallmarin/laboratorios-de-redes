@@ -57,4 +57,5 @@ Con este método comprendí que un switch multicapa puede realizar funciones de 
 #### Topología del método 3
 
 
-![Topología del método 3](./metodo-3-switch-capa-3/topologia.png)
+![Topología del método 3](./01-enrutamiento-entre-vlan/metodo-3-switch-capa-3/topologia.png)
+
